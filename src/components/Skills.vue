@@ -2,12 +2,16 @@
    <div class="holder">
      <form @submit.prevent="addSkill">
      <input type="text" placeholder="enter a skill" v-model="skill" v-validate="'min:4'" name="skill">
+     <transition name="alert-in" enter-active-class="animated flinInX" leave-active-class="animated flipOutX">
       <p class="alert" v-if="errors.has('skill')">{{ errors.first('skill') }}</p>
-         </form>
+     </transition>
+      </form>
       <ul>
-        <li v-for="(data, index) in skills" v-bind:key="index">
+      <transition-group name="list" enter-active-class="animated bounceInUp" leave-active-class="animated bounceOutDown">
+        <li v-for="(data, index) in skills" :key="index">
           {{data.skill}}
         </li>
+      </transition-group>
       </ul>
       <!-- <p v-if="skills.length >= 1">You have more than one skill </p>
       <p v-else>You have atmost one skill</p> -->
@@ -49,6 +53,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+@import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
+
 .holder {
     background: #fff;
   }
@@ -92,4 +98,22 @@ export default {
     padding: 5px;
     margin-top: -20px;
   }
+  .alert-in-enter-active {
+    animation: bounce-in .5s;
+  }
+  .alert-in-leave-active {
+    animation: bounce-in .5s reverse;
+  }
+  @keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 </style>
