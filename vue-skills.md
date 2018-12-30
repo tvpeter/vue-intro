@@ -25,6 +25,8 @@ iii) Through cli
 
  - You can get values from a form in vue by using the v-model
  - Vue forms validation can be done with packages eg vee-validate `npm install vee-validate`
+ - Install vue router 
+
 
 
 
